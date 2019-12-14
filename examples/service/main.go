@@ -11,7 +11,7 @@ import (
 
 func main(){
 	service := micro.NewService(
-		micro.Name("com.d7kj.micro.greeter"),
+		micro.Name("com.d7kj.micro.srv.greeter"),
 		micro.Metadata(map[string]string{"type": "hello,world"}),
 		// 命令行选项
 		micro.Flags(cli.BoolFlag{Name: "run_client", Usage: "launch the client",}),
@@ -25,7 +25,7 @@ func main(){
 			}
 		}),
 		)
-	
+
 	// Register handler
 	proto.RegisterGreeterHandler(service.Server(), new(Greeter))
 
@@ -46,7 +46,7 @@ func (g *Greeter)Hello(ctx context.Context, req *proto.Request, rsp *proto.Respo
 
 func runClient(service micro.Service) {
 	// Create new greeter client
-	greeter := proto.NewGreeterService("com.d7kj.micro.greeter", service.Client())
+	greeter := proto.NewGreeterService("com.d7kj.micro.srv.greeter", service.Client())
 	// Call the greeter
 	rsp, err := greeter.Hello(context.TODO(), &proto.Request{Name: "John"})
 	if err != nil {

@@ -8,7 +8,9 @@ protoc --proto_path=. --go_out=. --micro_out=. proto/greeter.proto
 ```shell script
 go run main.go
 ```
-运行客户端
+Call function
 ```shell script
-go run main.go --run_client
+micro call com.d7kj.micro.fnc.greeter Greeter.Hello '{"name": "john"}'
 ```
+
+调用一次之后，服务就会退出
